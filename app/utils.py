@@ -23,8 +23,6 @@ CATEGORY_LABELS = {
 # AWS S3 Configuration
 S3_BUCKET_NAME = "hse-diploma-models" 
 S3_REGION = "us-east-1"  
-S3_MODEL_DIR = "models/"
-S3_DATA_DIR = "data/"
 
 # Local directories
 LOCAL_MODEL_DIR = "models"
@@ -182,7 +180,7 @@ def load_transformations(transformations_file):
 
 def load_components():
     # Get model file name dynamically from S3
-    model_files = s3.list_objects_v2(Bucket=S3_BUCKET_NAME, Prefix=S3_MODEL_DIR).get("Contents", [])
+    model_files = s3.list_objects_v2(Bucket=S3_BUCKET_NAME).get("Contents", [])
     model_files = [obj["Key"] for obj in model_files if obj["Key"].endswith(".pth")]
 
     if not model_files:
@@ -242,8 +240,8 @@ def load_components():
     model.to(device)
 
     # Download embeddings & transformations from S3
-    embeddings_s3_path = f"{S3_DATA_DIR}{model_name}_embeddings.npz"
-    transformations_s3_path = f"{S3_DATA_DIR}{model_name}_transformations.json"
+    embeddings_s3_path = f"{model_name}_embeddings.npz"  
+    transformations_s3_path = f"{model_name}_transformations.json"  
 
     embeddings_local_path = os.path.join(LOCAL_DATA_DIR, f"{model_name}_embeddings.npz")
     transformations_local_path = os.path.join(LOCAL_DATA_DIR, f"{model_name}_transformations.json")
