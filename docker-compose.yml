@@ -11,6 +11,8 @@ services:
     environment:
       - MODEL_DIR=/app/models
       - DATA_DIR=/app/data
+    env_file:
+      - .env
 
   web_client:
     build:
