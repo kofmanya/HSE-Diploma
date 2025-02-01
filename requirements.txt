@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+torch
+torchvision
+timm
+transformers
+neptune
+numpy
+pandas
+flask
+requests
+pillow
+opencv-python
+python-multipart
