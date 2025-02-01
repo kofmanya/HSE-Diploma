@@ -3,3 +3,4 @@ data/*.npz
 data/*.json
 __pycache__/
 *.DS_Store
+AWSCLIV2.pkg
